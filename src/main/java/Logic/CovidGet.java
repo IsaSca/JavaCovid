@@ -23,14 +23,8 @@ public class CovidGet {
     }
     HashMap<String, Object> mapped = mapper.readValue(allInfo, HashMap.class);
     ArrayList<LinkedHashMap<String, Object>> countries = (ArrayList<LinkedHashMap<String, Object>>) mapped.get("Countries");
-    
     if (country.equals("help")) {
-      System.out.println("Please enter an available country code.\n" +
-        "Available codes are:\n");
-      for (LinkedHashMap<String, Object> l : countries) {
-        System.out.println(l.get("Country").toString() + ": "
-          + l.get("CountryCode").toString());
-      }
+      infoHelp(countries);
     } else if (country.equals("")) {
       System.out.println("Please enter a country code. Type covid help to see them.");
     } else {
@@ -41,8 +35,17 @@ public class CovidGet {
       }
       System.out.println("No data found for that country code.");
     }
-    
     return null;
+  }
+  
+  
+  private void infoHelp(ArrayList<LinkedHashMap<String, Object>> countries) {
+    System.out.println("Please enter an available country code.\n" +
+      "Available codes are:\n");
+    for (LinkedHashMap<String, Object> l : countries) {
+      System.out.println(l.get("Country").toString() + ": "
+        + l.get("CountryCode").toString());
+    }
   }
   
   public String getAllInfo() {
