@@ -15,13 +15,17 @@ public class CovidGet {
   private final OkHttpClient client = new OkHttpClient();
   private final ObjectMapper mapper = new ObjectMapper();
   
-  public String getInfo(String country) throws JsonProcessingException {
+  public LinkedHashMap<String, Object> getInfo(String country) throws JsonProcessingException {
     String allInfo = getAllInfo();
+    if(allInfo.contains("maximum request limit")) {
+      System.out.println("Maximum API calls reached. Try again in 1 minute.");
+      return null;
+    }
     HashMap<String, Object> mapped = mapper.readValue(allInfo, HashMap.class);
     ArrayList<LinkedHashMap<String, Object>> countries = (ArrayList<LinkedHashMap<String, Object>>) mapped.get("Countries");
     for (LinkedHashMap<String, Object> l: countries) {
       if(l.containsValue(country)) {
-        return l.toString();
+        return l;
       }
     }
     return null;
