@@ -7,11 +7,11 @@ import java.io.IOException;
 
 class CovidGetTest {
   
-  CovidGet covidGet;
+  CovidGet covidGet = new CovidGet();
+  String results = covidGet.getAllInfo();
   
   @org.junit.jupiter.api.BeforeEach
   void setUp() {
-    covidGet = new CovidGet();
   }
   
   @org.junit.jupiter.api.AfterEach
@@ -20,6 +20,6 @@ class CovidGetTest {
   
   @Test
   public void test() throws IOException {
-    System.out.println(covidGet.getInfo("United Kingdom"));
+    System.out.println(covidGet.getInfo(results, "United Kingdom"));
   }
 }

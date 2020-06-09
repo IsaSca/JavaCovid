@@ -18,8 +18,6 @@ public class ResultDisplay {
     return countryName;
   }
   
-
-  
   @Override
   public String toString() {
     return "Results:" + '\n' +
@@ -33,9 +31,9 @@ public class ResultDisplay {
       "Date = " + date;
   }
   
-  public ResultDisplay(String country) throws JsonProcessingException {
+  public ResultDisplay(String info, String country) throws JsonProcessingException {
     CovidGet covidResults = new CovidGet();
-    LinkedHashMap<String, Object> results = covidResults.getInfo(country);
+    LinkedHashMap<String, Object> results = covidResults.getInfo(info, country);
     if(results == null) {
       return;
     }
